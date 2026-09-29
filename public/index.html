@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A lightweight todo and notes workspace." />
+  <title>Focusboard — Todos & Notes</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div>
+        <p class="eyebrow">Personal workspace</p>
+        <h1>Focusboard</h1>
+        <p class="muted">Tasks, notes, and the small things that keep work moving.</p>
+      </div>
+
+      <nav class="tabs" aria-label="Primary navigation">
+        <button class="tab active" data-view="todos">Tasks</button>
+        <button class="tab" data-view="notes">Notes</button>
+      </nav>
+
+      <div class="stats" id="stats"></div>
+
+      <button class="theme-toggle" id="themeToggle" type="button">Toggle theme</button>
+    </aside>
+
+    <main class="content">
+      <section id="todosView" class="view active">
+        <header class="view-header">
+          <div>
+            <p class="eyebrow">Today</p>
+            <h2>What needs your attention?</h2>
+          </div>
+          <button class="primary" id="openTodoForm">+ New task</button>
+        </header>
+
+        <form class="panel form-panel hidden" id="todoForm">
+          <input type="hidden" id="todoId" />
+          <div class="form-grid">
+            <label class="wide">Title<input id="todoTitle" maxlength="160" required placeholder="e.g. Finish project brief" /></label>
+            <label class="wide">Description<textarea id="todoDescription" rows="3" placeholder="Optional context"></textarea></label>
+            <label>Priority<select id="todoPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label>
+            <label>Due date<input id="todoDueDate" type="datetime-local" /></label>
+            <label class="wide">Category<input id="todoCategory" maxlength="60" placeholder="Work, Personal, School…" /></label>
+          </div>
+          <div class="form-actions">
+            <button class="ghost" type="button" id="cancelTodo">Cancel</button>
+            <button class="primary" type="submit">Save task</button>
+          </div>
+        </form>
+
+        <div class="toolbar panel">
+          <input id="todoSearch" type="search" placeholder="Search tasks…" aria-label="Search tasks" />
+          <select id="todoStatus"><option value="all">All tasks</option><option value="active">Active</option><option value="completed">Completed</option></select>
+          <select id="todoPriorityFilter"><option value="">All priorities</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+          <select id="todoSort"><option value="created-desc">Newest</option><option value="created-asc">Oldest</option><option value="due-asc">Due soon</option><option value="due-desc">Due later</option></select>
+        </div>
+
+        <div class="cards" id="todoList"></div>
+      </section>
+
+      <section id="notesView" class="view">
+        <header class="view-header">
+          <div>
+            <p class="eyebrow">Reference</p>
+            <h2>Keep useful thoughts nearby.</h2>
+          </div>
+          <button class="primary" id="openNoteForm">+ New note</button>
+        </header>
+
+        <form class="panel form-panel hidden" id="noteForm">
+          <input type="hidden" id="noteId" />
+          <div class="form-grid">
+            <label class="wide">Title<input id="noteTitle" maxlength="160" required placeholder="e.g. Meeting notes" /></label>
+            <label class="wide">Note<textarea id="noteContent" rows="7" required placeholder="Write anything worth keeping…"></textarea></label>
+            <label>Tag<input id="noteTag" maxlength="60" placeholder="Idea, Research, Work…" /></label>
+            <label class="check-label"><input id="notePinned" type="checkbox" /> Pin this note</label>
+          </div>
+          <div class="form-actions">
+            <button class="ghost" type="button" id="cancelNote">Cancel</button>
+            <button class="primary" type="submit">Save note</button>
+          </div>
+        </form>
+
+        <div class="toolbar panel notes-toolbar">
+          <input id="noteSearch" type="search" placeholder="Search notes…" aria-label="Search notes" />
+          <label class="check-label"><input id="notePinnedOnly" type="checkbox" /> Pinned only</label>
+        </div>
+
+        <div class="notes-grid" id="noteList"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

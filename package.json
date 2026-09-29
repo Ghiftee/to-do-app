@@ -1,0 +1,19 @@
+{
+  "name": "todo-notes-app",
+  "version": "1.0.0",
+  "description": "A lightweight todo and notes app built with Node.js, Express, and vanilla JavaScript.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test",
+    "check": "node --check server.js && node --check src/app.js && node --check public/app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
